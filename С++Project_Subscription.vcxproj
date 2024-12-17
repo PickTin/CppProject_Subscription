@@ -129,13 +129,17 @@
   <ItemGroup>
     <ClCompile Include="CityCall.cpp" />
     <ClCompile Include="InternationalCall.cpp" />
+    <ClCompile Include="InternetConnection.cpp" />
     <ClCompile Include="Subscription.cpp" />
+    <ClCompile Include="SubscriptionContainer.cpp" />
     <ClCompile Include="С++Project_Subscription.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CityCall.h" />
     <ClInclude Include="InternationalCall.h" />
+    <ClInclude Include="InternetConnection.h" />
     <ClInclude Include="Subscription.h" />
+    <ClInclude Include="SubscriptionContainer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

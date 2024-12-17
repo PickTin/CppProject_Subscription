@@ -27,6 +27,12 @@
     <ClCompile Include="CityCall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InternetConnection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SubscriptionContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Subscription.h">
@@ -36,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CityCall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InternetConnection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SubscriptionContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
