@@ -1,37 +1,43 @@
 #include "Subscription.h"
+#include <iostream>
+
+using namespace std;
 
 namespace BillingSystem {
-
+    Subscription::Subscription(string ln, string fn, string mn, string addr, string ct, string pd)
+        : lastName(ln), firstName(fn), middleName(mn), address(addr), city(ct), passportData(pd) {}
     int Subscription::count = 0;
 
-    Subscription::Subscription(const std::string& lastName, const std::string& firstName, const std::string& patronymic,
-        const std::string& address, const std::string& city, const std::string& passportData)
-        : lastName(lastName), firstName(firstName), patronymic(patronymic),
-        address(address), city(city), passportData(passportData) {
-        if (lastName.empty() || city.empty()) throw std::invalid_argument("Invalid input data");
-        ++count;
+    Subscription::Subscription(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd)
+        : lastName(ln), firstName(fn), middleName(mn), address(addr), city(ct), passportData(pd) {
+        count++;
     }
 
-    Subscription::~Subscription() { --count; }
-
-    int Subscription::getCount() { return count; }
-
-    void Subscription::display() const {
-        std::cout << "Last Name: " << lastName << ", First Name: " << firstName << ", Patronymic: " << patronymic
-            << ", Address: " << address << ", City: " << city << ", Passport: " << passportData << std::endl;
+    Subscription::~Subscription() {
+        count--;
     }
 
-    const std::string& Subscription::getLastName() const { return lastName; }
+    std::string Subscription::getLastName() const {
+        return lastName;
+    }
 
-    const std::string& Subscription::getCity() const { return city; }
+    void Subscription::setCity(const std::string& newCity) {
+        city = newCity;
+    }
 
-    void Subscription::setCity(const std::string& newCity) { city = newCity; }
+    int Subscription::getCount() {
+        return count;
+    }
 
-    bool Subscription::operator==(const Subscription& other) const { return lastName == other.lastName; }
-
+    Subscription::~Subscription() {}
     std::ostream& operator<<(std::ostream& os, const Subscription& sub) {
-        os << sub.lastName << " " << sub.firstName << " " << sub.patronymic << " " << sub.address << " "
-            << sub.city << " " << sub.passportData;
+        os << "Name: " << sub.lastName << " " << sub.firstName << " " << sub.middleName
+            << ", Address: " << sub.address << ", City: " << sub.city;
         return os;
+    }
+
+    string Subscription::getLastName() const { return lastName; }
+    bool Subscription::operator==(const Subscription& other) const {
+        return this->lastName == other.lastName;
     }
 }

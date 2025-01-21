@@ -1,28 +1,18 @@
 #pragma once
 #include "Subscription.h"
-
 namespace BillingSystem {
-
     class CityCall : public Subscription {
     private:
         double tariff;
-        double duration;
-        double payment;
-        int month;
-        int year;
+        int duration;
+        double totalAmount;
+        int month, year;
 
     public:
-        CityCall(const std::string& lastName, const std::string& firstName, const std::string& patronymic,
-            const std::string& address, const std::string& city, const std::string& passportData,
-            double tariff, double duration, double payment, int month, int year);
+        CityCall(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd,
+            double t, int dur, double ta, int m, int y);
+        CityCall(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd, double t, int d);
 
-        virtual void display() const override;
-        double getPayment() const;
-        void setPayment(double newPayment);
-        double getDuration() const;
-        void setDuration(double newDuration);
-        int getMonth() const;
-        int getYear() const;
+        void display() const override;
     };
-
 }

@@ -2,20 +2,26 @@
 #include "Subscription.h"
 #include <vector>
 #include <algorithm>
+#include <fstream>
 
 namespace BillingSystem {
-
     class SubscriptionContainer {
     private:
         std::vector<Subscription*> subscriptions;
 
     public:
         ~SubscriptionContainer();
+
         void addSubscription(Subscription* sub);
-        void removeSubscriptionByLastName(const std::string& lastName);
-        Subscription* findSubscriptionByLastName(const std::string& lastName);
-        void editSubscriptionByLastName(const std::string& lastName, const std::string& newCity);
-        void sortByLastName();
         void displayAll() const;
+
+        void removeSubscriptionByLastName(const std::string& lastName);
+        void editSubscription(const std::string& lastName);
+        Subscription* findSubscriptionByLastName(const std::string& lastName);
+
+        void saveToFile(const std::string& filename) const;
+        void loadFromFile(const std::string& filename);
+
+        void sortByLastName();
     };
 }

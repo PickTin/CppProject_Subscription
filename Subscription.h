@@ -1,15 +1,13 @@
 #pragma once
-#include <iostream>
 #include <string>
-#include <stdexcept>
+#include <iostream>
 
 namespace BillingSystem {
-
     class Subscription {
-    private:
+    protected:
         std::string lastName;
         std::string firstName;
-        std::string patronymic;
+        std::string middleName;
         std::string address;
         std::string city;
         std::string passportData;
@@ -17,17 +15,18 @@ namespace BillingSystem {
         static int count;
 
     public:
-        Subscription(const std::string& lastName, const std::string& firstName, const std::string& patronymic,
-            const std::string& address, const std::string& city, const std::string& passportData);
+        Subscription(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd);
         virtual ~Subscription();
 
-        static int getCount();
-        virtual void display() const;
-        const std::string& getLastName() const;
-        const std::string& getCity() const;
+        virtual void display() const = 0;
+
+        std::string getLastName() const;
         void setCity(const std::string& newCity);
 
-        bool operator==(const Subscription& other) const;
+        static int getCount();
+
+
         friend std::ostream& operator<<(std::ostream& os, const Subscription& sub);
+        bool operator==(const Subscription& other) const;
     };
 }
