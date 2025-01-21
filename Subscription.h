@@ -1,32 +1,33 @@
 #pragma once
-#include <string>
 #include <iostream>
+#include <string>
+#include <stdexcept>
 
 namespace BillingSystem {
+
     class Subscription {
-    protected:
+    private:
         std::string lastName;
         std::string firstName;
-        std::string middleName;
+        std::string patronymic;
         std::string address;
         std::string city;
         std::string passportData;
 
-        static int count;  
+        static int count;
 
     public:
-        Subscription(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd);
+        Subscription(const std::string& lastName, const std::string& firstName, const std::string& patronymic,
+            const std::string& address, const std::string& city, const std::string& passportData);
         virtual ~Subscription();
 
-        virtual void display() const = 0;
-
-        std::string getLastName() const;
+        static int getCount();
+        virtual void display() const;
+        const std::string& getLastName() const;
+        const std::string& getCity() const;
         void setCity(const std::string& newCity);
 
-        static int getCount();
-
-       
-        friend std::ostream& operator<<(std::ostream& os, const Subscription& sub);
         bool operator==(const Subscription& other) const;
+        friend std::ostream& operator<<(std::ostream& os, const Subscription& sub);
     };
 }

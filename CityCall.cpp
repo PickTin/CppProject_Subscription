@@ -1,19 +1,24 @@
 #include "CityCall.h"
-#include <iostream>
-#include <iomanip>
 
 namespace BillingSystem {
-    CityCall::CityCall(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd, double t, int d)
-        : Subscription(ln, fn, mn, addr, ct, pd), tariff(t), duration(d) {}
+
+    CityCall::CityCall(const std::string& lastName, const std::string& firstName, const std::string& patronymic,
+        const std::string& address, const std::string& city, const std::string& passportData,
+        double tariff, double duration, double payment, int month, int year)
+        : Subscription(lastName, firstName, patronymic, address, city, passportData),
+        tariff(tariff), duration(duration), payment(payment), month(month), year(year) {}
 
     void CityCall::display() const {
-        std::cout << std::left << std::setw(15) << lastName
-            << std::setw(10) << firstName
-            << std::setw(10) << middleName
-            << std::setw(20) << address
-            << std::setw(15) << city
-            << std::setw(15) << passportData
-            << std::setw(10) << tariff
-            << std::setw(10) << duration << " min\n";
+        Subscription::display();
+        std::cout << "Tariff: " << tariff << ", Duration: " << duration << " minutes, Payment: " << payment
+            << ", Date: " << month << "/" << year << std::endl;
     }
+
+    double CityCall::getPayment() const { return payment; }
+    void CityCall::setPayment(double newPayment) { payment = newPayment; }
+    double CityCall::getDuration() const { return duration; }
+    void CityCall::setDuration(double newDuration) { duration = newDuration; }
+    int CityCall::getMonth() const { return month; }
+    int CityCall::getYear() const { return year; }
+
 }

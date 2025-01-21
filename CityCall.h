@@ -2,14 +2,27 @@
 #include "Subscription.h"
 
 namespace BillingSystem {
+
     class CityCall : public Subscription {
     private:
         double tariff;
-        int duration;
+        double duration;
+        double payment;
+        int month;
+        int year;
 
     public:
-        CityCall(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd, double t, int d);
+        CityCall(const std::string& lastName, const std::string& firstName, const std::string& patronymic,
+            const std::string& address, const std::string& city, const std::string& passportData,
+            double tariff, double duration, double payment, int month, int year);
 
-        void display() const override;
+        virtual void display() const override;
+        double getPayment() const;
+        void setPayment(double newPayment);
+        double getDuration() const;
+        void setDuration(double newDuration);
+        int getMonth() const;
+        int getYear() const;
     };
+
 }
