@@ -3,6 +3,9 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include "CityCall.h"
+#include "InternationalCall.h"
+#include "InternetConnection.h"
 
 namespace BillingSystem {
     class SubscriptionContainer {

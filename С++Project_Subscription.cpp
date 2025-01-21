@@ -1,4 +1,6 @@
 ﻿#include "CityCall.h"
+#include "InternetConnection.h"
+#include "InternationalCall.h"
 #include "SubscriptionContainer.h"
 #include "Subscription.h"
 #include <iostream>
@@ -30,28 +32,103 @@ int main() {
         cin >> choice;
 
         if (choice == 1) {
+            string type;
+            cout << "Enter subscription type (CityCall, InternetConnection, InternationalCall): ";
+            cin >> type;
+
             string lastName, firstName, middleName, address, city, passportData;
-            double tariff;
-            int duration;
+            int month, year;
 
-            cout << "Enter Last Name: ";
-            cin >> lastName;
-            cout << "Enter First Name: ";
-            cin >> firstName;
-            cout << "Enter Middle Name: ";
-            cin >> middleName;
-            cout << "Enter Address: ";
-            cin >> address;
-            cout << "Enter City: ";
-            cin >> city;
-            cout << "Enter Passport Data: ";
-            cin >> passportData;
-            cout << "Enter Tariff: ";
-            cin >> tariff;
-            cout << "Enter Duration (minutes): ";
-            cin >> duration;
+            if (type == "CityCall") {
+                double tariff;
+                int duration;
 
-            container.addSubscription(new CityCall(lastName, firstName, middleName, address, city, passportData, tariff, duration));
+                cout << "Enter Last Name: ";
+                cin >> lastName;
+                cout << "Enter First Name: ";
+                cin >> firstName;
+                cout << "Enter Middle Name: ";
+                cin >> middleName;
+                cout << "Enter Address: ";
+                cin >> address;
+                cout << "Enter City: ";
+                cin >> city;
+                cout << "Enter Passport Data: ";
+                cin >> passportData;
+                cout << "Enter Tariff: ";
+                cin >> tariff;
+                cout << "Enter Duration (minutes): ";
+                cin >> duration;
+
+                container.addSubscription(new CityCall(lastName, firstName, middleName, address, city, passportData, tariff, duration));
+            }
+            else if (type == "InternetConnection") {
+                string connectionName;
+                int dataVolume;
+                double totalAmount;
+
+                cout << "Enter Last Name: ";
+                cin >> lastName;
+                cout << "Enter First Name: ";
+                cin >> firstName;
+                cout << "Enter Middle Name: ";
+                cin >> middleName;
+                cout << "Enter Address: ";
+                cin >> address;
+                cout << "Enter City: ";
+                cin >> city;
+                cout << "Enter Passport Data: ";
+                cin >> passportData;
+                cout << "Enter Connection Name: ";
+                cin >> connectionName;
+                cout << "Enter Data Volume (MB): ";
+                cin >> dataVolume;
+                cout << "Enter Total Amount: ";
+                cin >> totalAmount;
+                cout << "Enter Month: ";
+                cin >> month;
+                cout << "Enter Year: ";
+                cin >> year;
+
+                container.addSubscription(new InternetConnection(lastName, firstName, middleName, address, city, passportData, connectionName, dataVolume, totalAmount, month, year));
+            }
+            else if (type == "InternationalCall") {
+                string country, cityCall;
+                int duration;
+                double price, totalAmount;
+
+                cout << "Enter Last Name: ";
+                cin >> lastName;
+                cout << "Enter First Name: ";
+                cin >> firstName;
+                cout << "Enter Middle Name: ";
+                cin >> middleName;
+                cout << "Enter Address: ";
+                cin >> address;
+                cout << "Enter City: ";
+                cin >> city;
+                cout << "Enter Passport Data: ";
+                cin >> passportData;
+                cout << "Enter Country: ";
+                cin >> country;
+                cout << "Enter City for Call: ";
+                cin >> cityCall;
+                cout << "Enter Duration (minutes): ";
+                cin >> duration;
+                cout << "Enter Price: ";
+                cin >> price;
+                cout << "Enter Total Amount: ";
+                cin >> totalAmount;
+                cout << "Enter Month: ";
+                cin >> month;
+                cout << "Enter Year: ";
+                cin >> year;
+
+                container.addSubscription(new InternationalCall(lastName, firstName, middleName, address, city, passportData, country, cityCall, duration, price, totalAmount, month, year));
+            }
+            else {
+                cout << "Invalid subscription type. Try again.\n";
+            }
         }
         else if (choice == 2) {
             string lastName;
