@@ -9,7 +9,9 @@ namespace BillingSystem {
 
     public:
         CityCall(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd, double t, int d);
-
         void display() const override;
+
+        double getTariff() const;
+        int getDuration() const;
     };
 }

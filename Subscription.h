@@ -21,10 +21,15 @@ namespace BillingSystem {
         virtual void display() const = 0;
 
         std::string getLastName() const;
+        std::string getFirstName() const;
+        std::string getMiddleName() const;
+        std::string getAddress() const;
+        std::string getCity() const;
+        std::string getPassportData() const;
+
         void setCity(const std::string& newCity);
 
         static int getCount();
-
 
         friend std::ostream& operator<<(std::ostream& os, const Subscription& sub);
         bool operator==(const Subscription& other) const;

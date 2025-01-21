@@ -16,7 +16,8 @@ namespace BillingSystem {
 
     void SubscriptionContainer::displayAll() const {
         for (auto sub : subscriptions) {
-            sub->display();
+            sub->display(); 
+            std::cout << "---------------------------------------------------------------------------------------\n"; 
         }
     }
 
@@ -47,81 +48,111 @@ namespace BillingSystem {
         return nullptr;
     }
 
-    void SubscriptionContainer::saveToFile(const std::string& filename) const {
-        std::ofstream file(filename);
+    void SubscriptionContainer::saveToFile(const string& filename) const {
+        ofstream file(filename);
+
         for (auto sub : subscriptions) {
-            file << *sub << "\n";
+            if (dynamic_cast<CityCall*>(sub)) {
+                file << "CityCall\n";
+                file << sub->getLastName() << "\n";
+                file << sub->getFirstName() << "\n";
+                file << sub->getMiddleName() << "\n";
+                file << sub->getAddress() << "\n";
+                file << sub->getCity() << "\n";
+                file << sub->getPassportData() << "\n";
+                file << dynamic_cast<CityCall*>(sub)->getTariff() << "\n";
+                file << dynamic_cast<CityCall*>(sub)->getDuration() << "\n";
+            }
+            else if (dynamic_cast<InternetConnection*>(sub)) {
+                file << "InternetConnection\n";
+                file << sub->getLastName() << "\n";
+                file << sub->getFirstName() << "\n";
+                file << sub->getMiddleName() << "\n";
+                file << sub->getAddress() << "\n";
+                file << sub->getCity() << "\n";
+                file << sub->getPassportData() << "\n";
+                file << dynamic_cast<InternetConnection*>(sub)->getConnectionName() << "\n";
+                file << dynamic_cast<InternetConnection*>(sub)->getDataVolume() << "\n";
+                file << dynamic_cast<InternetConnection*>(sub)->getTotalAmount() << "\n";
+                file << dynamic_cast<InternetConnection*>(sub)->getMonth() << "\n";
+                file << dynamic_cast<InternetConnection*>(sub)->getYear() << "\n";
+            }
+            else if (dynamic_cast<InternationalCall*>(sub)) {
+                file << "InternationalCall\n";
+                file << sub->getLastName() << "\n";
+                file << sub->getFirstName() << "\n";
+                file << sub->getMiddleName() << "\n";
+                file << sub->getAddress() << "\n";
+                file << sub->getCity() << "\n";
+                file << sub->getPassportData() << "\n";
+                file << dynamic_cast<InternationalCall*>(sub)->getCountry() << "\n";
+                file << dynamic_cast<InternationalCall*>(sub)->getCityCall() << "\n";
+                file << dynamic_cast<InternationalCall*>(sub)->getDuration() << "\n";
+                file << dynamic_cast<InternationalCall*>(sub)->getPrice() << "\n";
+                file << dynamic_cast<InternationalCall*>(sub)->getTotalAmount() << "\n";
+                file << dynamic_cast<InternationalCall*>(sub)->getMonth() << "\n";
+                file << dynamic_cast<InternationalCall*>(sub)->getYear() << "\n";
+            }
         }
     }
 
-    void SubscriptionContainer::loadFromFile(const std::string& filename) {
-        std::ifstream file(filename);
-        if (!file.is_open()) {
-            std::cout << "Failed to open file for loading.\n";
-            return;
-        }
+    void SubscriptionContainer::loadFromFile(const string& filename) {
+        ifstream file(filename);
+        string type;
 
-        std::string line;
-        while (std::getline(file, line)) {
-            std::istringstream iss(line);
-            std::string type;
-            std::getline(iss, type, ','); 
+        while (getline(file, type)) {
             if (type == "CityCall") {
-                std::string lastName, firstName, middleName, address, city, passportData;
+                string lastName, firstName, middleName, address, city, passportData;
                 double tariff;
                 int duration;
-                std::getline(iss, lastName, ',');
-                std::getline(iss, firstName, ',');
-                std::getline(iss, middleName, ',');
-                std::getline(iss, address, ',');
-                std::getline(iss, city, ',');
-                std::getline(iss, passportData, ',');
-                iss >> tariff >> duration;
-
-                
+                getline(file, lastName);
+                getline(file, firstName);
+                getline(file, middleName);
+                getline(file, address);
+                getline(file, city);
+                getline(file, passportData);
+                file >> tariff >> duration;
+                file.ignore();  
                 addSubscription(new CityCall(lastName, firstName, middleName, address, city, passportData, tariff, duration));
             }
-            else if (type == "InternationalCall") {
-                std::string lastName, firstName, middleName, address, city, passportData, country, cityCall;
-                double price, totalAmount;
-                int duration, month, year;
-                std::getline(iss, lastName, ',');
-                std::getline(iss, firstName, ',');
-                std::getline(iss, middleName, ',');
-                std::getline(iss, address, ',');
-                std::getline(iss, city, ',');
-                std::getline(iss, passportData, ',');
-                std::getline(iss, country, ',');
-                std::getline(iss, cityCall, ',');
-                iss >> duration >> price >> totalAmount >> month >> year;
-
-               
-                addSubscription(new InternationalCall(lastName, firstName, middleName, address, city, passportData, country, cityCall, duration, price, totalAmount, month, year));
-            }
             else if (type == "InternetConnection") {
-                std::string lastName, firstName, middleName, address, city, passportData, connectionName;
-                int dataVolume, month, year;
+                string lastName, firstName, middleName, address, city, passportData, connectionName;
+                int dataVolume;
                 double totalAmount;
-                std::getline(iss, lastName, ',');
-                std::getline(iss, firstName, ',');
-                std::getline(iss, middleName, ',');
-                std::getline(iss, address, ',');
-                std::getline(iss, city, ',');
-                std::getline(iss, passportData, ',');
-                std::getline(iss, connectionName, ',');
-                iss >> dataVolume >> totalAmount >> month >> year;
-
-                
+                int month, year;
+                getline(file, lastName);
+                getline(file, firstName);
+                getline(file, middleName);
+                getline(file, address);
+                getline(file, city);
+                getline(file, passportData);
+                getline(file, connectionName);
+                file >> dataVolume >> totalAmount >> month >> year;
+                file.ignore();
                 addSubscription(new InternetConnection(lastName, firstName, middleName, address, city, passportData, connectionName, dataVolume, totalAmount, month, year));
             }
+            else if (type == "InternationalCall") {
+                string lastName, firstName, middleName, address, city, passportData, country, cityCall;
+                int duration;
+                double price, totalAmount;
+                int month, year;
+                getline(file, lastName);
+                getline(file, firstName);
+                getline(file, middleName);
+                getline(file, address);
+                getline(file, city);
+                getline(file, passportData);
+                getline(file, country);
+                getline(file, cityCall);
+                file >> duration >> price >> totalAmount >> month >> year;
+                file.ignore();
+                addSubscription(new InternationalCall(lastName, firstName, middleName, address, city, passportData, country, cityCall, duration, price, totalAmount, month, year));
+            }
             else {
-                cout << "Unknown subscription type: " << type << std::endl;
-
-                continue;
+                cout << "Unknown subscription type: " << type << endl;
+                file.ignore(numeric_limits<streamsize>::max(), '\n');  
             }
         }
-
-        file.close();
     }
 
 

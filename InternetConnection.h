@@ -10,9 +10,13 @@ namespace BillingSystem {
         int month, year;
 
     public:
-        InternetConnection(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd,
-            std::string cn, int dv, double ta, int m, int y);
-
+        InternetConnection(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd, std::string cn, int dv, double ta, int m, int y);
         void display() const override;
+
+        std::string getConnectionName() const;
+        int getDataVolume() const;
+        double getTotalAmount() const;
+        int getMonth() const;
+        int getYear() const;
     };
 }

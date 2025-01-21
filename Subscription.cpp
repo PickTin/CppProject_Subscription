@@ -1,3 +1,4 @@
+
 #include "Subscription.h"
 
 namespace BillingSystem {
@@ -16,6 +17,26 @@ namespace BillingSystem {
         return lastName;
     }
 
+    std::string Subscription::getFirstName() const {
+        return firstName;
+    }
+
+    std::string Subscription::getMiddleName() const {
+        return middleName;
+    }
+
+    std::string Subscription::getAddress() const {
+        return address;
+    }
+
+    std::string Subscription::getCity() const {
+        return city;
+    }
+
+    std::string Subscription::getPassportData() const {
+        return passportData;
+    }
+
     void Subscription::setCity(const std::string& newCity) {
         city = newCity;
     }
@@ -26,7 +47,7 @@ namespace BillingSystem {
 
     std::ostream& operator<<(std::ostream& os, const Subscription& sub) {
         os << "Name: " << sub.lastName << " " << sub.firstName << " " << sub.middleName
-            << ", Address: " << sub.address << ", City: " << sub.city;
+            << ", Address: " << sub.address << ", City: " << sub.city << ", Passport Data: " << sub.passportData;
         return os;
     }
 

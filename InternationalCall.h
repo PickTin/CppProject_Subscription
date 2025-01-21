@@ -12,9 +12,15 @@ namespace BillingSystem {
         int month, year;
 
     public:
-        InternationalCall(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd,
-            std::string cntry, std::string cityC, int dur, double p, double ta, int m, int y);
-
+        InternationalCall(std::string ln, std::string fn, std::string mn, std::string addr, std::string ct, std::string pd, std::string cntry, std::string cityC, int dur, double p, double ta, int m, int y);
         void display() const override;
+
+        std::string getCountry() const;
+        std::string getCityCall() const;
+        int getDuration() const;
+        double getPrice() const;
+        double getTotalAmount() const;
+        int getMonth() const;
+        int getYear() const;
     };
 }
